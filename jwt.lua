@@ -152,7 +152,7 @@ end
 -- helper used to aid in shallow copying properties from table to table
 local function shallow_copy_table(src, destination)
   for key, value in pairs(src) do
-    src[key] = destination[key]
+    destination[key] = src[key]
   end
   return destination
 end
@@ -177,12 +177,12 @@ local function add_jwt_header(conf)
 end
 
 -- Builds and returns JWT based on configuration
-function _M.build_jwt(conf, payload)
+function _M.build_jwt(conf, private_payload)
   local payload_hash = build_payload_hash()
-  local base_payload = build_jwt_payload(conf, payload_hash)
-  local complete_payload = supplement_payload(base_payload, payload)
+  local payload = build_jwt_payload(conf, payload_hash)
+  payload[conf.jwt_private_property_name] = private_payload
   local kong_private_key = get_kong_key("pkey", get_private_key_location(conf))
-  local jwt = encode_jwt_token(conf, complete_payload, kong_private_key)
+  local jwt = encode_jwt_token(conf, payload, kong_private_key)
   return jwt
 end
 

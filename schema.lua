@@ -5,6 +5,7 @@ return {
     public_key_location = { type = "string", required = false },
     key_id = { type = "string", required = false},
     header = { type = "string", default = "JWT"},
+    jwt_private_property_name = { type = "string", default = "private" },
     include_credential_type = { type = "boolean", default = false},
     headers = { type = "array", default = {}}
   }
