@@ -183,7 +183,7 @@ function _M.build_jwt(conf, private_payload)
   payload[conf.jwt_private_property_name] = private_payload
   local kong_private_key = get_kong_key("pkey", get_private_key_location(conf))
   local jwt = encode_jwt_token(conf, payload, kong_private_key)
-  return jwt
+  return build_header_value(conf, jwt)
 end
 
 return _M
