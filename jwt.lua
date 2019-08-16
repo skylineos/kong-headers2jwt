@@ -149,6 +149,14 @@ local function build_header_value(conf, jwt)
   end
 end
 
+-- helper used to aid in shallow copying properties from table to table
+local function shallow_copy_table(src, destination)
+  for key, value in pairs(src) do
+    src[key] = destination[key]
+  end
+  return destination
+end
+
 -- helper used to add custom fields to base_payload
 local function supplement_payload(base_payload, payload)
   local new_payload = {}
@@ -157,13 +165,6 @@ local function supplement_payload(base_payload, payload)
   return new_payload
 end
 
--- helper used to aid in shallow copying properties from table to table
-local function shallow_copy_table(src, destination)
-  for key, value in pairs(src) do
-    src[key] = destination[key]
-  end
-  return destination
-end
 
 --- Add the JWT header to the request
 -- @param conf the configuration
