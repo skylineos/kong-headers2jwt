@@ -13,7 +13,7 @@ function KongHeaders2JwtHandler:access(conf)
   access.execute(conf)
 end
 
-KongHeaders2JwtHandler.PRIORITY = 802 -- This plugin needs to be run as late as possible to be given opportunity to sign as much info as possible.
+KongHeaders2JwtHandler.PRIORITY = 800 -- This plugin needs to be run as late as possible to be given opportunity to sign as much info as possible.
 KongHeaders2JwtHandler.VERSION = "0.1.0"
 
 return KongHeaders2JwtHandler
