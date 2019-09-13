@@ -8,12 +8,17 @@ function KongHeaders2JwtHandler:new()
   KongHeaders2JwtHandler.super.new(self, "kong-headers2jwt")
 end
 
+function KongHeaders2JwtHandler:rewrite(conf)
+  KongHeaders2JwtHandler.super.rewrite(self)
+  access.rewrite(conf)
+end
+
 function KongHeaders2JwtHandler:access(conf)
   KongHeaders2JwtHandler.super.access(self)
   access.execute(conf)
 end
 
 KongHeaders2JwtHandler.PRIORITY = 800 -- This plugin needs to be run as late as possible to be given opportunity to sign as much info as possible.
-KongHeaders2JwtHandler.VERSION = "0.1.0"
+KongHeaders2JwtHandler.VERSION = "0.2.0"
 
 return KongHeaders2JwtHandler
