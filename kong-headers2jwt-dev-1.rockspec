@@ -15,8 +15,8 @@ dependencies = {
 build = {
    type = "builtin",
    modules = {
-      ["kong.plugins.kong-headers2jwt.handler"] = "handler.lua",
-      ["kong.plugins.kong-headers2jwt.schema"] = "schema.lua",
-      ["kong.plugins.kong-headers2jwt.jwt"] = "jwt.lua"
+      ["kong.plugins.kong-headers2jwt.handler"] = "kong/plugins/kong-headers2jwt/handler.lua",
+      ["kong.plugins.kong-headers2jwt.schema"] = "kong/plugins/kong-headers2jwt/schema.lua",
+      ["kong.plugins.kong-headers2jwt.jwt"] = "kong/plugins/kong-headers2jwt/jwt.lua"
    }
 }

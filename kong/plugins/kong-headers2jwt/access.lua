@@ -1,5 +1,5 @@
 local _M = {}
-local jwt = require "kong.plugins.kong-headers2jwt.jwt"
+local jwt = require("kong.plugins.kong-headers2jwt.jwt")
 local pl_file = require "pl.file"
 
 
