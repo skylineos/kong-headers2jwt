@@ -1,5 +1,5 @@
 package = "kong-headers2jwt"
-version = "dev-1"
+version = "v0.2.1"
 source = {
     url = "git://github.com/skylineos/kong-headers2jwt",
     branch = "master",
