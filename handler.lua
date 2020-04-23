@@ -8,6 +8,11 @@ function KongHeaders2JwtHandler:new()
   KongHeaders2JwtHandler.super.new(self, "kong-headers2jwt")
 end
 
+function KongHeaders2JwtHandler:rewrite(conf)
+  KongHeaders2JwtHandler.super.rewrite(self)
+  access.rewrite(conf)
+end
+
 function KongHeaders2JwtHandler:access(conf)
   KongHeaders2JwtHandler.super.access(self)
   access.execute(conf)

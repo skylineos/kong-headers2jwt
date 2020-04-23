@@ -2,9 +2,12 @@ local _M = {}
 local jwt = require "kong.plugins.kong-headers2jwt.jwt"
 local pl_file = require "pl.file"
 
+function isPublicKeyRequest(conf)
+    return ngx.var.uri == conf.public_key_uri
+end
 
 function respondWithPublicCert(conf)
-    ngx.log(ngx.INFO, "Public Key route hit, will serve key.")
+    ngx.log(ngx.INFO, "Responding with Public Cert.")
 
     -- get key file location
     local public_key_file_location = os.getenv("KONG_SSL_CERT_DER")
@@ -26,11 +29,20 @@ function respondWithPublicCert(conf)
     return ngx.exit(ngx.HTTP_OK)
 end
 
+function _M.rewrite(conf)
+    ngx.log(ngx.INFO, "access:rewrite(conf) starting")
+
+    -- check to see if request is attempting to retrieve public crt
+    if (isPublicKeyRequest(conf)) then
+        return respondWithPublicCert(conf)
+    end
+end
+
 function _M.execute(conf)
     ngx.log(ngx.INFO, "access:execute(conf) starting")
 
     -- check to see if request is attempting to retrieve public crt
-    if (ngx.var.uri == conf.public_key_uri) then
+    if (isPublicKeyRequest(conf)) then
         return respondWithPublicCert(conf)
     end
 
